@@ -1,5 +1,5 @@
 // ==========================================
-// Authentication Logic
+// Authentication Logic - FIXED VERSION
 // ==========================================
 
 // DOM Elements
@@ -70,10 +70,8 @@ loginForm.addEventListener('submit', async (e) => {
     
     const userData = userDoc.data();
     
-    // Redirect based on role
-    if (userData.role === 'recruiter') {
-      window.location.href = 'dashboard-recruiter.html';
-    } else if (userData.role === 'seeker') {
+    // Redirect to seeker dashboard (only seeker role now)
+    if (userData.role === 'seeker') {
       window.location.href = 'dashboard-seeker.html';
     } else {
       throw new Error('Invalid user role');
@@ -123,7 +121,7 @@ registerForm.addEventListener('submit', async (e) => {
   const name = document.getElementById('registerName').value.trim();
   const email = document.getElementById('registerEmail').value.trim();
   const password = document.getElementById('registerPassword').value;
-  const role = document.querySelector('input[name="role"]:checked').value;
+  const role = 'seeker'; // Always seeker now
   
   // Clear previous errors
   registerError.textContent = '';
@@ -160,12 +158,8 @@ registerForm.addEventListener('submit', async (e) => {
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
     });
     
-    // Redirect based on role
-    if (role === 'recruiter') {
-      window.location.href = 'dashboard-recruiter.html';
-    } else {
-      window.location.href = 'dashboard-seeker.html';
-    }
+    // Redirect to job seeker dashboard
+    window.location.href = 'dashboard-seeker.html';
     
   } catch (error) {
     console.error('Registration error:', error);
@@ -182,13 +176,13 @@ registerForm.addEventListener('submit', async (e) => {
         errorMessage = 'Invalid email address';
         break;
       case 'auth/operation-not-allowed':
-        errorMessage = 'Email/password accounts are not enabled';
+        errorMessage = 'Registration is currently disabled';
         break;
       case 'auth/weak-password':
-        errorMessage = 'Password is too weak. Please use a stronger password';
+        errorMessage = 'Password is too weak';
         break;
       default:
-        errorMessage = error.message;
+        errorMessage = error.message || errorMessage;
     }
     
     registerError.textContent = errorMessage;
@@ -210,10 +204,8 @@ auth.onAuthStateChanged(async (user) => {
       if (userDoc.exists) {
         const userData = userDoc.data();
         
-        // Redirect to appropriate dashboard
-        if (userData.role === 'recruiter') {
-          window.location.href = 'dashboard-recruiter.html';
-        } else {
+        // Redirect to seeker dashboard (only seeker role now)
+        if (userData.role === 'seeker') {
           window.location.href = 'dashboard-seeker.html';
         }
       }
