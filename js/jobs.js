@@ -1,8 +1,8 @@
 // ========================================
-// Jobs API & Display Logic
+// Jobs API & Display Logic - FIXED VERSION
 // ========================================
 
-// API Configuration (Using Remotive API - No API key needed!)
+// API Configuration
 const API_URL = 'https://remotive.com/api/remote-jobs';
 
 // Pagination
@@ -57,7 +57,7 @@ function displayJobs(jobs) {
         container.appendChild(jobCard);
     });
     
-    // Update pagination buttons
+    // Update pagination
     updatePaginationButtons(jobs.length);
 }
 
@@ -68,17 +68,20 @@ function createJobCard(job) {
     const card = document.createElement('div');
     card.className = 'job-card';
     
+    // Create unique ID for this job
+    const jobId = job.id || `job-${Date.now()}-${Math.random()}`;
+    
     card.innerHTML = `
-        <h3>${job.title}</h3>
-        <p class="company">${job.company_name}</p>
-        <p class="location">📍 ${job.candidate_required_location || 'Remote'}</p>
-        <p class="salary">💰 ${job.salary || 'Not specified'}</p>
+        <h3>${escapeHtml(job.title)}</h3>
+        <p class="company">${escapeHtml(job.company_name)}</p>
+        <p class="location">📍 ${escapeHtml(job.candidate_required_location || 'Remote')}</p>
+        <p class="salary">💰 ${escapeHtml(job.salary || 'Not specified')}</p>
         <p class="description">${truncateText(job.description, 150)}</p>
         <div class="actions">
-            <button class="btn-primary btn-save" onclick="saveJob('${job.id}', event)">
+            <button class="btn-primary btn-save" id="save-btn-${jobId}" onclick="saveJob('${jobId}')">
                 💾 Save Job
             </button>
-            <a href="${job.url}" target="_blank" class="btn-primary">
+            <a href="${escapeHtml(job.url)}" target="_blank" class="btn-primary">
                 Apply →
             </a>
         </div>
@@ -88,51 +91,104 @@ function createJobCard(job) {
 }
 
 // ========================================
-// SAVE JOB TO FIRESTORE
+// SAVE JOB TO FIRESTORE - FIXED VERSION
 // ========================================
-async function saveJob(jobId, event) {
+async function saveJob(jobId) {
+    console.log("Save job clicked for:", jobId);
+    
+    // Check if user is logged in
     const user = auth.currentUser;
     
     if (!user) {
-        alert('Please login to save jobs!');
+        alert('Please login first to save jobs!');
         window.location.href = 'login.html';
         return;
     }
     
-    const button = event.target;
+    console.log("User logged in:", user.uid);
+    
+    // Get the button
+    const button = document.getElementById(`save-btn-${jobId}`);
+    
+    if (!button) {
+        console.error("Button not found for jobId:", jobId);
+        return;
+    }
+    
+    // Disable button temporarily
+    button.disabled = true;
+    button.textContent = 'Saving...';
     
     try {
-        // Find the job data
-        const job = allJobs.find(j => j.id == jobId);
+        // Find the job in our array
+        const job = allJobs.find(j => j.id == jobId || `job-${j.id}` == jobId);
         
         if (!job) {
-            showToast('Job not found!');
+            throw new Error('Job not found in list');
+        }
+        
+        console.log("Job found:", job.title);
+        
+        // Check if already saved
+        const existingJob = await db.collection('savedJobs')
+            .where('userId', '==', user.uid)
+            .where('jobId', '==', String(jobId))
+            .get();
+        
+        if (!existingJob.empty) {
+            showToast('Job already saved!');
+            button.textContent = '✓ Already Saved';
+            button.classList.add('saved');
             return;
         }
         
-        // Save to Firestore
-        await db.collection('savedJobs').add({
+        // Prepare job data
+        const jobData = {
             userId: user.uid,
-            jobId: job.id,
-            title: job.title,
-            company: job.company_name,
+            userEmail: user.email,
+            jobId: String(jobId),
+            title: job.title || 'No title',
+            company: job.company_name || 'Unknown company',
             location: job.candidate_required_location || 'Remote',
             salary: job.salary || 'Not specified',
-            description: truncateText(job.description, 150),
-            url: job.url,
+            description: truncateText(job.description || 'No description', 150),
+            url: job.url || '#',
             savedAt: firebase.firestore.FieldValue.serverTimestamp()
-        });
+        };
+        
+        console.log("Saving job data:", jobData);
+        
+        // Save to Firestore
+        const docRef = await db.collection('savedJobs').add(jobData);
+        
+        console.log("Job saved successfully! Doc ID:", docRef.id);
         
         // Update button
         button.textContent = '✓ Saved';
         button.classList.add('saved');
-        button.disabled = true;
         
+        // Show success message
         showToast('Job saved successfully!');
         
     } catch (error) {
         console.error('Error saving job:', error);
-        showToast('Error saving job. Try again!');
+        
+        // Show user-friendly error
+        let errorMessage = 'Error saving job. ';
+        
+        if (error.code === 'permission-denied') {
+            errorMessage += 'Permission denied. Check Firestore rules.';
+        } else if (error.code === 'unauthenticated') {
+            errorMessage += 'Please login again.';
+        } else {
+            errorMessage += error.message;
+        }
+        
+        showToast(errorMessage);
+        
+        // Re-enable button
+        button.disabled = false;
+        button.textContent = '💾 Save Job';
     }
 }
 
@@ -161,7 +217,7 @@ function searchJobs() {
         return matchesSearch && matchesLocation;
     });
     
-    currentPage = 1; // Reset to first page
+    currentPage = 1;
     displayJobs(filteredJobs);
 }
 
@@ -194,11 +250,20 @@ function updatePaginationButtons(totalJobs) {
 // UTILITY FUNCTIONS
 // ========================================
 function truncateText(text, maxLength) {
+    if (!text) return '';
+    
     // Remove HTML tags
     const cleanText = text.replace(/<[^>]*>/g, '');
     
     if (cleanText.length <= maxLength) return cleanText;
     return cleanText.substring(0, maxLength) + '...';
+}
+
+function escapeHtml(text) {
+    if (!text) return '';
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
 }
 
 function showLoading(show) {
@@ -210,6 +275,8 @@ function showLoading(show) {
 
 function showToast(message) {
     const toast = document.getElementById('toast');
+    if (!toast) return;
+    
     toast.textContent = message;
     toast.classList.add('show');
     
@@ -219,13 +286,26 @@ function showToast(message) {
 }
 
 // ========================================
-// INITIALIZE - Load jobs when page loads
+// INITIALIZE
 // ========================================
 if (document.getElementById('jobsContainer')) {
-    fetchJobs();
+    // Wait for auth state before loading jobs
+    auth.onAuthStateChanged((user) => {
+        if (user) {
+            console.log("User authenticated, loading jobs...");
+            fetchJobs();
+        } else {
+            console.log("No user, redirecting to login...");
+            // Uncomment if you want to force login
+            // window.location.href = 'login.html';
+            
+            // Or allow browsing without login
+            fetchJobs();
+        }
+    });
 }
 
-// Add enter key support for search
+// Search on Enter key
 document.getElementById('searchInput')?.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') searchJobs();
 });
