@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Jobs - Job Portal</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <h2>🚀 JobPortal</h2>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="dashboard.html">Jobs</a></li>
+                <li><a href="saved-jobs.html">Saved Jobs</a></li>
+                <li><a href="#" id="logoutBtn" class="btn-primary">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Search Section -->
+    <section class="search-section">
+        <div class="container">
+            <h1>Find Your Perfect Job</h1>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search by job title, company, skills...">
+                <input type="text" id="locationInput" placeholder="Location">
+                <button onclick="searchJobs()" class="btn-primary">Search</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Loading Spinner -->
+    <div id="loadingSpinner" class="spinner-container" style="display: none;">
+        <div class="spinner"></div>
+        <p>Loading jobs...</p>
+    </div>
+
+    <!-- Jobs Section -->
+    <section class="jobs-section">
+        <div class="container">
+            <div id="jobsContainer" class="jobs-grid">
+                <!-- Jobs will be loaded here dynamically -->
+            </div>
+            
+            <!-- Pagination -->
+            <div id="pagination" class="pagination">
+                <button onclick="previousPage()" id="prevBtn" disabled>Previous</button>
+                <span id="pageInfo">Page 1</span>
+                <button onclick="nextPage()" id="nextBtn">Next</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    
+    <!-- Custom Scripts -->
+    <script src="js/firebase-config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/jobs.js"></script>
+</body>
+</html>

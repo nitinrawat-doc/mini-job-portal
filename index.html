@@ -3,166 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Job Portal - Login</title>
+    <title>Job Portal - Find Your Dream Job</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <!-- Animated Background -->
-    <div class="animated-bg">
-        <div class="gradient-orb orb-1"></div>
-        <div class="gradient-orb orb-2"></div>
-        <div class="gradient-orb orb-3"></div>
-    </div>
-    <!-- Navigation Header -->
+    <!-- Navigation -->
     <nav class="navbar">
-        <div class="nav-container">
+        <div class="container">
             <div class="logo">
-                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                    <rect width="32" height="32" rx="8" fill="url(#gradient)"/>
-                    <path d="M16 8L20 16L16 24L12 16L16 8Z" fill="white"/>
-                    <defs>
-                        <linearGradient id="gradient" x1="0" y1="0" x2="32" y2="32">
-                            <stop offset="0%" stop-color="#667eea"/>
-                            <stop offset="100%" stop-color="#764ba2"/>
-                        </linearGradient>
-                    </defs>
-                </svg>
-                <span>JobPortal</span>
+                <h2>🚀 JobPortal</h2>
             </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="dashboard.html">Jobs</a></li>
+                <li><a href="login.html" class="btn-primary">Login</a></li>
+            </ul>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <div class="hero-section">
-        <div class="hero-content">
-            <h1 class="hero-title">Discover Your Next Opportunity</h1>
-            <p class="hero-subtitle">Search thousands of real job listings from top companies worldwide</p>
-        </div>
-    </div>
-
-    <!-- Auth Container -->
-    <div class="auth-container">
-        <!-- Login Form -->
-        <div class="auth-card" id="loginCard">
-            <div class="auth-header">
-                <h2>Welcome Back</h2>
-                <p>Sign in to your account</p>
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Find Your Dream Job Today</h1>
+                <p>Search thousands of job listings from top companies</p>
+                <div class="cta-buttons">
+                    <a href="signup.html" class="btn-primary btn-large">Get Started</a>
+                    <a href="dashboard.html" class="btn-secondary btn-large">Browse Jobs</a>
+                </div>
             </div>
-
-            <form id="loginForm" class="auth-form">
-                <div class="form-group">
-                    <label for="loginEmail">Email Address</label>
-                    <input 
-                        type="email" 
-                        id="loginEmail" 
-                        placeholder="you@example.com" 
-                        required
-                    >
-                </div>
-
-                <div class="form-group">
-                    <label for="loginPassword">Password</label>
-                    <input 
-                        type="password" 
-                        id="loginPassword" 
-                        placeholder="Enter your password" 
-                        required
-                    >
-                </div>
-
-                <button type="submit" class="btn btn-primary">Sign In</button>
-
-                <div class="form-footer">
-                    <p>Don't have an account? 
-                        <a href="#" id="showRegister">Create one</a>
-                    </p>
-                </div>
-            </form>
-
-            <div id="loginError" class="error-message"></div>
         </div>
+    </section>
 
-        <!-- Register Form -->
-        <div class="auth-card hidden" id="registerCard">
-            <div class="auth-header">
-                <h2>Create Account</h2>
-                <p>Join our job portal today</p>
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2>Why Choose Us?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3>Smart Search</h3>
+                    <p>Find jobs by keyword, location, and more</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💾</div>
+                    <h3>Save Jobs</h3>
+                    <p>Bookmark jobs and apply later</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Real-time Updates</h3>
+                    <p>Get latest job postings instantly</p>
+                </div>
             </div>
-
-            <form id="registerForm" class="auth-form">
-                <div class="form-group">
-                    <label for="registerName">Full Name</label>
-                    <input 
-                        type="text" 
-                        id="registerName" 
-                        placeholder="John Doe" 
-                        required
-                    >
-                </div>
-
-                <div class="form-group">
-                    <label for="registerEmail">Email Address</label>
-                    <input 
-                        type="email" 
-                        id="registerEmail" 
-                        placeholder="you@example.com" 
-                        required
-                    >
-                </div>
-
-                <div class="form-group">
-                    <label for="registerPassword">Password</label>
-                    <input 
-                        type="password" 
-                        id="registerPassword" 
-                        placeholder="Minimum 6 characters" 
-                        required
-                        minlength="6"
-                    >
-                </div>
-
-                <div class="form-group">
-                    <label>Account Type:</label>
-                    <div class="role-selector">
-                        <label class="role-option">
-                            <input type="radio" name="role" value="seeker" checked style="display: none;">
-                            <span class="role-card">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                                    <circle cx="12" cy="7" r="4"/>
-                                </svg>
-                                <strong>Job Seeker</strong>
-                                <small>Find and apply to thousands of jobs</small>
-                            </span>
-                        </label>
-                    </div>
-                </div>
-
-                <button type="submit" class="btn btn-primary">Create Account</button>
-
-                <div class="form-footer">
-                    <p>Already have an account? 
-                        <a href="#" id="showLogin">Sign in</a>
-                    </p>
-                </div>
-            </form>
-
-            <div id="registerError" class="error-message"></div>
         </div>
-    </div>
+    </section>
 
-    <!-- Loading Spinner -->
-    <div class="loading-overlay hidden" id="loadingOverlay">
-        <div class="spinner"></div>
-    </div>
-
-    <!-- Firebase SDKs -->
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
-
-    <!-- App Scripts -->
-    <script src="js/firebase-config.js"></script>
-    <script src="js/auth.js"></script>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 JobPortal. Student Mini Project.</p>
+        </div>
+    </footer>
 </body>
 </html>

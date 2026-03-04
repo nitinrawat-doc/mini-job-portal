@@ -1,29 +1,23 @@
-// ==========================================
+// ========================================
 // Firebase Configuration
-// ==========================================
+// Replace with YOUR Firebase config
+// ========================================
 
-// IMPORTANT: Replace these values with your actual Firebase config
-// Get this from Firebase Console > Project Settings > Your apps > Web app
+ const firebaseConfig = {
+    apiKey: "AIzaSyA33L0eFCRNwvgDlS3aAaFW3gRZNntcjDA",
+    authDomain: "job-portal-mini-68bad.firebaseapp.com",
+    projectId: "job-portal-mini-68bad",
+    storageBucket: "job-portal-mini-68bad.firebasestorage.app",
+    messagingSenderId: "250444121575",
+    appId: "1:250444121575:web:5c82426c954fdb2717a942"
+  };
 
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyD0KFwBsRKYNS-Qu9jXvkqhgAXmKbOnQ_I",
-  authDomain: "mini-job-portal-fef9e.firebaseapp.com",
-  projectId: "mini-job-portal-fef9e",
-  storageBucket: "mini-job-portal-fef9e.firebasestorage.app",
-  messagingSenderId: "938865435520",
-  appId: "1:938865435520:web:acb34fbe6393077acc1765",
-};
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-// Initialize Firebase services
+// Initialize services
 const auth = firebase.auth();
 const db = firebase.firestore();
 
-// Export for use in other files
-window.auth = auth;
-window.db = db;
-
-console.log("Firebase initialized successfully");
+console.log("Firebase initialized successfully!");
