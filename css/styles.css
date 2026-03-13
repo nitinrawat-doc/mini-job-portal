@@ -99,9 +99,9 @@ body {
     font-size: 1rem;
 }
 
-/* ===== HERO SECTION ===== */
+/* ===== HERO SECTION - BLUE GRADIENT ===== */
 .hero {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #5a4c31 0%, #7a4e15 100%);
     color: white;
     padding: 6rem 0;
     text-align: center;
@@ -220,9 +220,9 @@ body {
     text-decoration: none;
 }
 
-/* ===== SEARCH SECTION ===== */
+/* ===== SEARCH SECTION - BLUE GRADIENT ===== */
 .search-section {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #2f7c81 0%, #083338 100%);
     padding: 3rem 0;
     color: white;
 }
