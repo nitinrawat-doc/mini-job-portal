@@ -1,69 +1,334 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Job Portal - Find Your Dream Job</title>
-    <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JobPortal - Your Dream Career Starts Here</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/home.css" />
+  </head>
+  <body class="home-page">
     <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="logo">
-                <h2>🚀 JobPortal</h2>
-            </div>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="dashboard.html">Jobs</a></li>
-                <li><a href="login.html" class="btn-primary">Login</a></li>
-            </ul>
+    <nav class="navbar-home">
+      <div class="container">
+        <div class="logo-modern">
+          <div class="logo-icon">
+            <svg width="40" height="40" viewBox="0 0 40 40">
+              <!-- In navbar logo -->
+              <defs>
+                <linearGradient
+                  id="logoGrad"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="100%"
+                >
+                  <stop
+                    offset="0%"
+                    style="stop-color: #4facfe; stop-opacity: 1"
+                  />
+                  <stop
+                    offset="100%"
+                    style="stop-color: #00f2fe; stop-opacity: 1"
+                  />
+                </linearGradient>
+              </defs>
+              <rect width="40" height="40" rx="10" fill="url(#logoGrad)" />
+              <path d="M20 10 L28 20 L20 30 L12 20 Z" fill="white" />
+            </svg>
+          </div>
+          <span class="logo-text">JobPortal</span>
         </div>
+        <div class="nav-actions">
+          <a href="login.html" class="nav-btn login-btn">Login</a>
+          <a href="signup.html" class="nav-btn register-btn">Register</a>
+        </div>
+      </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Find Your Dream Job Today</h1>
-                <p>Search thousands of job listings from top companies</p>
-                <div class="cta-buttons">
-                    <a href="signup.html" class="btn-primary btn-large">Get Started</a>
-                    <a href="dashboard.html" class="btn-secondary btn-large">Browse Jobs</a>
-                </div>
+    <section class="hero-modern">
+      <div class="hero-bg-gradient"></div>
+      <div class="hero-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+      </div>
+
+      <div class="container hero-container">
+        <div class="hero-content-modern">
+          <div class="hero-badge">
+            <span class="badge-icon">✨</span>
+            <span>Find Your Perfect Job Match</span>
+          </div>
+
+          <h1 class="hero-title-modern">
+            Your Dream Career<br />
+            <span class="gradient-text">Starts Here</span>
+          </h1>
+
+          <p class="hero-subtitle-modern">
+            Discover thousands of job opportunities from top companies
+            worldwide. Create your account today and take the first step towards
+            your dream career.
+          </p>
+
+          <div class="hero-cta">
+            <a href="signup.html" class="cta-primary">
+              <span class="cta-icon">🚀</span>
+              <span>Create Account</span>
+            </a>
+            <a href="login.html" class="cta-secondary">
+              <span class="cta-icon">👤</span>
+              <span>Login</span>
+            </a>
+          </div>
+
+          <div class="hero-stats">
+            <div class="stat-item">
+              <div class="stat-number">10K+</div>
+              <div class="stat-label">Active Jobs</div>
             </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+              <div class="stat-number">5K+</div>
+              <div class="stat-label">Companies</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+              <div class="stat-number">50K+</div>
+              <div class="stat-label">Job Seekers</div>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Features Section -->
-    <section class="features">
-        <div class="container">
-            <h2>Why Choose Us?</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🔍</div>
-                    <h3>Smart Search</h3>
-                    <p>Find jobs by keyword, location, and more</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">💾</div>
-                    <h3>Save Jobs</h3>
-                    <p>Bookmark jobs and apply later</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
-                    <h3>Real-time Updates</h3>
-                    <p>Get latest job postings instantly</p>
-                </div>
-            </div>
+    <section class="features-modern">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Why Choose JobPortal?</h2>
+          <p class="section-subtitle">
+            Everything you need to find your dream job
+          </p>
         </div>
+
+        <div class="features-grid-modern">
+          <div class="feature-card-modern">
+            <div class="feature-icon-wrapper">
+              <div class="feature-icon gradient-1">
+                <svg
+                  width="32"
+                  height="32"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <path d="m21 21-4.35-4.35"></path>
+                </svg>
+              </div>
+            </div>
+            <h3 class="feature-title">Smart Search</h3>
+            <p class="feature-desc">
+              Advanced filters to find jobs that match your skills and
+              preferences
+            </p>
+          </div>
+
+          <div class="feature-card-modern">
+            <div class="feature-icon-wrapper">
+              <div class="feature-icon gradient-2">
+                <svg
+                  width="32"
+                  height="32"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"
+                  ></path>
+                </svg>
+              </div>
+            </div>
+            <h3 class="feature-title">Save & Track</h3>
+            <p class="feature-desc">
+              Bookmark jobs and keep track of your applications in one place
+            </p>
+          </div>
+
+          <div class="feature-card-modern">
+            <div class="feature-icon-wrapper">
+              <div class="feature-icon gradient-3">
+                <svg
+                  width="32"
+                  height="32"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+                </svg>
+              </div>
+            </div>
+            <h3 class="feature-title">Instant Updates</h3>
+            <p class="feature-desc">
+              Get notified about new job postings that match your profile
+            </p>
+          </div>
+
+          <div class="feature-card-modern">
+            <div class="feature-icon-wrapper">
+              <div class="feature-icon gradient-4">
+                <svg
+                  width="32"
+                  height="32"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+              </div>
+            </div>
+            <h3 class="feature-title">Secure & Private</h3>
+            <p class="feature-desc">
+              Your data is protected with enterprise-grade security
+            </p>
+          </div>
+
+          <div class="feature-card-modern">
+            <div class="feature-icon-wrapper">
+              <div class="feature-icon gradient-5">
+                <svg
+                  width="32"
+                  height="32"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                  <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                </svg>
+              </div>
+            </div>
+            <h3 class="feature-title">Top Companies</h3>
+            <p class="feature-desc">
+              Access jobs from leading companies across industries
+            </p>
+          </div>
+
+          <div class="feature-card-modern">
+            <div class="feature-icon-wrapper">
+              <div class="feature-icon gradient-6">
+                <svg
+                  width="32"
+                  height="32"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+              </div>
+            </div>
+            <h3 class="feature-title">Easy Apply</h3>
+            <p class="feature-desc">
+              Apply to multiple jobs with just one click
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="cta-gradient-bg"></div>
+      <div class="container">
+        <div class="cta-content">
+          <h2 class="cta-title">Ready to Start Your Journey?</h2>
+          <p class="cta-subtitle">
+            Join thousands of job seekers who found their dream careers through
+            JobPortal
+          </p>
+          <div class="cta-buttons">
+            <a href="signup.html" class="cta-btn-primary">
+              Create Free Account
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+            <a href="login.html" class="cta-btn-secondary"
+              >Already have an account?</a
+            >
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 JobPortal. Student Mini Project.</p>
+    <footer class="footer-modern">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-logo">
+            <div class="logo-icon">
+              <svg width="32" height="32" viewBox="0 0 40 40">
+                <!-- In footer logo -->
+                <defs>
+                  <linearGradient
+                    id="footerLogoGrad"
+                    x1="0%"
+                    y1="0%"
+                    x2="100%"
+                    y2="100%"
+                  >
+                    <stop
+                      offset="0%"
+                      style="stop-color: #4facfe; stop-opacity: 1"
+                    />
+                    <stop
+                      offset="100%"
+                      style="stop-color: #00f2fe; stop-opacity: 1"
+                    />
+                  </linearGradient>
+                </defs>
+                <rect
+                  width="32"
+                  height="32"
+                  rx="8"
+                  fill="url(#footerLogoGrad)"
+                />
+                <path d="M16 8 L22 16 L16 24 L10 16 Z" fill="white" />
+              </svg>
+            </div>
+            <span>JobPortal</span>
+          </div>
+          <p class="footer-tagline">
+            Your gateway to endless career opportunities
+          </p>
+          <p class="footer-copyright">
+            &copy; 2024 JobPortal. Student Mini Project.
+          </p>
         </div>
+      </div>
     </footer>
-</body>
+  </body>
 </html>
