@@ -1,18 +1,11 @@
-// ========================================
-// Jobs API & Display Logic - FIXED VERSION
-// ========================================
 
-// API Configuration
 const API_URL = 'https://remotive.com/api/remote-jobs';
 
-// Pagination
 let currentPage = 1;
 let allJobs = [];
 const JOBS_PER_PAGE = 9;
 
-// ========================================
-// FETCH JOBS FROM API
-// ========================================
+
 async function fetchJobs() {
     showLoading(true);
     
@@ -32,9 +25,6 @@ async function fetchJobs() {
     }
 }
 
-// ========================================
-// DISPLAY JOBS
-// ========================================
 function displayJobs(jobs) {
     const container = document.getElementById('jobsContainer');
     
@@ -43,32 +33,26 @@ function displayJobs(jobs) {
         return;
     }
     
-    // Calculate pagination
+    
     const startIndex = (currentPage - 1) * JOBS_PER_PAGE;
     const endIndex = startIndex + JOBS_PER_PAGE;
     const paginatedJobs = jobs.slice(startIndex, endIndex);
     
-    // Clear container
     container.innerHTML = '';
     
-    // Create job cards
     paginatedJobs.forEach(job => {
         const jobCard = createJobCard(job);
         container.appendChild(jobCard);
     });
     
-    // Update pagination
     updatePaginationButtons(jobs.length);
 }
 
-// ========================================
-// CREATE JOB CARD
-// ========================================
+
 function createJobCard(job) {
     const card = document.createElement('div');
     card.className = 'job-card';
     
-    // Create unique ID for this job
     const jobId = job.id || `job-${Date.now()}-${Math.random()}`;
     
     card.innerHTML = `
@@ -90,13 +74,9 @@ function createJobCard(job) {
     return card;
 }
 
-// ========================================
-// SAVE JOB TO FIRESTORE - FIXED VERSION
-// ========================================
 async function saveJob(jobId) {
     console.log("Save job clicked for:", jobId);
     
-    // Check if user is logged in
     const user = auth.currentUser;
     
     if (!user) {
@@ -107,7 +87,6 @@ async function saveJob(jobId) {
     
     console.log("User logged in:", user.uid);
     
-    // Get the button
     const button = document.getElementById(`save-btn-${jobId}`);
     
     if (!button) {
@@ -115,12 +94,10 @@ async function saveJob(jobId) {
         return;
     }
     
-    // Disable button temporarily
     button.disabled = true;
     button.textContent = 'Saving...';
     
     try {
-        // Find the job in our array
         const job = allJobs.find(j => j.id == jobId || `job-${j.id}` == jobId);
         
         if (!job) {
@@ -129,7 +106,6 @@ async function saveJob(jobId) {
         
         console.log("Job found:", job.title);
         
-        // Check if already saved
         const existingJob = await db.collection('savedJobs')
             .where('userId', '==', user.uid)
             .where('jobId', '==', String(jobId))
@@ -142,7 +118,6 @@ async function saveJob(jobId) {
             return;
         }
         
-        // Prepare job data
         const jobData = {
             userId: user.uid,
             userEmail: user.email,
@@ -158,22 +133,18 @@ async function saveJob(jobId) {
         
         console.log("Saving job data:", jobData);
         
-        // Save to Firestore
         const docRef = await db.collection('savedJobs').add(jobData);
         
         console.log("Job saved successfully! Doc ID:", docRef.id);
         
-        // Update button
         button.textContent = '✓ Saved';
         button.classList.add('saved');
         
-        // Show success message
         showToast('Job saved successfully!');
         
     } catch (error) {
         console.error('Error saving job:', error);
         
-        // Show user-friendly error
         let errorMessage = 'Error saving job. ';
         
         if (error.code === 'permission-denied') {
@@ -186,15 +157,12 @@ async function saveJob(jobId) {
         
         showToast(errorMessage);
         
-        // Re-enable button
         button.disabled = false;
         button.textContent = '💾 Save Job';
     }
 }
 
-// ========================================
-// SEARCH FUNCTIONALITY
-// ========================================
+
 function searchJobs() {
     const searchTerm = document.getElementById('searchInput').value.toLowerCase();
     const location = document.getElementById('locationInput').value.toLowerCase();
@@ -221,9 +189,7 @@ function searchJobs() {
     displayJobs(filteredJobs);
 }
 
-// ========================================
-// PAGINATION
-// ========================================
+
 function nextPage() {
     currentPage++;
     displayJobs(allJobs);
@@ -246,13 +212,10 @@ function updatePaginationButtons(totalJobs) {
     document.getElementById('pageInfo').textContent = `Page ${currentPage} of ${totalPages}`;
 }
 
-// ========================================
-// UTILITY FUNCTIONS
-// ========================================
+
 function truncateText(text, maxLength) {
     if (!text) return '';
     
-    // Remove HTML tags
     const cleanText = text.replace(/<[^>]*>/g, '');
     
     if (cleanText.length <= maxLength) return cleanText;
@@ -285,27 +248,19 @@ function showToast(message) {
     }, 3000);
 }
 
-// ========================================
-// INITIALIZE
-// ========================================
 if (document.getElementById('jobsContainer')) {
-    // Wait for auth state before loading jobs
     auth.onAuthStateChanged((user) => {
         if (user) {
             console.log("User authenticated, loading jobs...");
             fetchJobs();
         } else {
             console.log("No user, redirecting to login...");
-            // Uncomment if you want to force login
-            // window.location.href = 'login.html';
             
-            // Or allow browsing without login
             fetchJobs();
         }
     });
 }
 
-// Search on Enter key
 document.getElementById('searchInput')?.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') searchJobs();
 });

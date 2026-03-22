@@ -1,113 +1,56 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
+  <head>
     <title>Test Save Job</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Test Firestore Save</h1>
     <button onclick="testSave()">Test Save</button>
-    <div id="result" style="margin-top: 20px; padding: 10px; background: #f0f0f0;"></div>
+    <div
+      id="result"
+      style="margin-top: 20px; padding: 10px; background: #f0f0f0"
+    ></div>
 
-    <!-- Firebase Scripts -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
-    
-    <!-- Your Config -->
+
     <script src="js/firebase-config.js"></script>
 
     <script>
-        async function testSave() {
-            const resultDiv = document.getElementById('result');
-            
-            // Check if user logged in
-            const user = auth.currentUser;
-            
-            if (!user) {
-                resultDiv.innerHTML = '❌ No user logged in! Login first.';
-                return;
-            }
-            
-            resultDiv.innerHTML = 'Testing save...';
-            
-            try {
-                // Try to save a test job
-                const docRef = await db.collection('savedJobs').add({
-                    userId: user.uid,
-                    userEmail: user.email,
-                    jobId: 'test-job-123',
-                    title: 'Test Job',
-                    company: 'Test Company',
-                    location: 'Remote',
-                    salary: '$100k',
-                    description: 'This is a test job',
-                    url: 'https://example.com',
-                    savedAt: firebase.firestore.FieldValue.serverTimestamp()
-                });
-                
-                resultDiv.innerHTML = '✅ SUCCESS! Job saved with ID: ' + docRef.id;
-                console.log("Saved successfully!");
-                
-            } catch (error) {
-                resultDiv.innerHTML = '❌ Error: ' + error.message;
-                console.error("Save failed:", error);
-            }
+      async function testSave() {
+        const resultDiv = document.getElementById("result");
+
+        const user = auth.currentUser;
+
+        if (!user) {
+          resultDiv.innerHTML = "❌ No user logged in! Login first.";
+          return;
         }
+
+        resultDiv.innerHTML = "Testing save...";
+
+        try {
+          const docRef = await db.collection("savedJobs").add({
+            userId: user.uid,
+            userEmail: user.email,
+            jobId: "test-job-123",
+            title: "Test Job",
+            company: "Test Company",
+            location: "Remote",
+            salary: "$100k",
+            description: "This is a test job",
+            url: "https://example.com",
+            savedAt: firebase.firestore.FieldValue.serverTimestamp(),
+          });
+
+          resultDiv.innerHTML = "✅ SUCCESS! Job saved with ID: " + docRef.id;
+          console.log("Saved successfully!");
+        } catch (error) {
+          resultDiv.innerHTML = "❌ Error: " + error.message;
+          console.error("Save failed:", error);
+        }
+      }
     </script>
-</body>
+  </body>
 </html>
-```
-
-**Test:**
-1. Login first on your main site
-2. Open `test-save.html` in same browser
-3. Click "Test Save"
-4. Check result
-
----
-
-## 🔍 STEP 6: CHECK FIRESTORE IN CONSOLE
-
-**After trying to save a job:**
-
-1. Go to **Firebase Console**
-2. **Firestore Database** → **Data** tab
-3. Check if **`savedJobs`** collection exists
-4. Check if any documents are there
-
----
-
-## 📋 COMPLETE TROUBLESHOOTING CHECKLIST
-
-- [ ] Firestore rules updated and published
-- [ ] Rules allow authenticated users to write
-- [ ] `jobs.js` replaced with fixed version
-- [ ] `saved-jobs.js` replaced with fixed version
-- [ ] Browser cache cleared (Ctrl + Shift + Delete)
-- [ ] Live Server restarted
-- [ ] User is logged in before saving
-- [ ] Console (F12) checked for errors
-- [ ] Tested with test-save.html
-
----
-
-## 🆘 COMMON ERRORS & FIXES
-
-### Error: "Permission denied"
-```
-Fix: Update Firestore rules (Step 2)
-```
-
-### Error: "auth is not defined"
-```
-Fix: Check Firebase scripts loaded in correct order in HTML
-```
-
-### Error: "Cannot read property 'add' of undefined"
-```
-Fix: db not initialized - check firebase-config.js
-```
-
-### Error: "Missing or insufficient permissions"
-```
-Fix: Firestore rules too strict or not published

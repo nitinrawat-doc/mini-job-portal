@@ -1,8 +1,4 @@
-/* ========================================
-   DASHBOARD PAGE - FULL BLUE GRADIENT THEME (NO PURPLE!)
-   ======================================== */
 
-/* ===== DASHBOARD PAGE BODY ===== */
 .dashboard-page {
     min-height: 100vh;
     background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
@@ -10,7 +6,6 @@
     overflow-x: hidden;
 }
 
-/* ===== ANIMATED BACKGROUND ===== */
 .dashboard-bg {
     position: fixed;
     top: 0;
@@ -76,7 +71,6 @@
     }
 }
 
-/* ===== NAVBAR ===== */
 .navbar-dashboard {
     background: rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(20px);
@@ -163,14 +157,12 @@
     transform: translateY(-2px);
 }
 
-/* ===== MAIN CONTENT ===== */
 .dashboard-main {
     position: relative;
     z-index: 1;
     padding: 3rem 0;
 }
 
-/* ===== HEADER ===== */
 .dashboard-header {
     text-align: center;
     margin-bottom: 3rem;
@@ -192,7 +184,6 @@
     color: rgba(255, 255, 255, 0.8);
 }
 
-/* ===== SEARCH SECTION - BLUE GRADIENT BOX ===== */
 .search-section {
     margin-bottom: 3rem;
 }
@@ -279,7 +270,6 @@
     box-shadow: 0 12px 30px rgba(79, 172, 254, 0.6);
 }
 
-/* ===== LOADING SPINNER ===== */
 .loading-spinner {
     text-align: center;
     padding: 4rem 0;
@@ -306,7 +296,6 @@
     color: rgba(255, 255, 255, 0.8);
 }
 
-/* ===== JOBS GRID - BLUE GRADIENT CARDS ===== */
 .jobs-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -425,7 +414,6 @@
     box-shadow: 0 6px 20px rgba(79, 172, 254, 0.6);
 }
 
-/* ===== PAGINATION - BLUE GRADIENT ===== */
 .pagination-section {
     display: flex;
     justify-content: center;
@@ -483,7 +471,6 @@
     font-size: 1rem;
 }
 
-/* ===== TOAST NOTIFICATION ===== */
 .toast {
     position: fixed;
     bottom: 2rem;
@@ -508,7 +495,6 @@
     transform: translateY(0);
 }
 
-/* ===== RESPONSIVE ===== */
 @media (max-width: 968px) {
     .search-grid {
         grid-template-columns: 1fr;

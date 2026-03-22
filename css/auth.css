@@ -1,9 +1,4 @@
-/* ========================================
-   AUTH PAGES DESIGN - BLUISH GRADIENT THEME
-   (For Login & Signup Pages)
-   ======================================== */
 
-/* ===== AUTH PAGE BODY ===== */
 .auth-page {
     min-height: 100vh;
     background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
@@ -11,7 +6,6 @@
     overflow: hidden;
 }
 
-/* ===== ANIMATED BACKGROUND ===== */
 .auth-bg {
     position: fixed;
     top: 0;
@@ -108,7 +102,6 @@
     color: white;
 }
 
-/* ===== AUTH CONTAINER ===== */
 .auth-container {
     position: relative;
     z-index: 1;
@@ -127,7 +120,6 @@
     margin: 0 auto;
 }
 
-/* ===== LEFT SIDE - INFO ===== */
 .auth-info {
     color: white;
 }
@@ -190,7 +182,6 @@
     font-size: 0.95rem;
 }
 
-/* ===== RIGHT SIDE - GLASSMORPHISM FORM ===== */
 .auth-form-container {
     display: flex;
     justify-content: center;
@@ -227,7 +218,6 @@
     font-size: 0.95rem;
 }
 
-/* ===== MODERN FORM STYLES ===== */
 .auth-form-modern {
     display: flex;
     flex-direction: column;
@@ -277,7 +267,6 @@
     box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.2);
 }
 
-/* ===== AUTH BUTTONS ===== */
 .btn-auth-primary {
     display: flex;
     align-items: center;
@@ -324,7 +313,6 @@
     border-color: rgba(255, 255, 255, 0.3);
 }
 
-/* ===== DIVIDER ===== */
 .auth-divider {
     text-align: center;
     margin: 1.5rem 0;
@@ -350,7 +338,6 @@
     backdrop-filter: blur(10px);
 }
 
-/* ===== MESSAGE BOXES ===== */
 .message-box {
     padding: 1rem;
     border-radius: 12px;
@@ -372,7 +359,6 @@
     color: #86efac;
 }
 
-/* ===== RESPONSIVE ===== */
 @media (max-width: 968px) {
     .auth-wrapper {
         grid-template-columns: 1fr;
@@ -414,9 +400,6 @@
         font-size: 1.5rem;
     }
 }
-/* ========================================
-   CENTERED LOGIN BOX (For Login Page Only)
-   ======================================== */
 
 .auth-container-centered {
     position: relative;
@@ -449,7 +432,6 @@
         inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
-/* Responsive for centered box */
 @media (max-width: 768px) {
     .auth-glass-card-centered {
         width: 90%;
